@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require 'pry'
+
 class Game
   attr_reader :player1, :player2
   attr_accessor :game_board, :next_move
@@ -67,21 +69,31 @@ class GameBoard
   end
 
   def diagonal_win?
-    temp_board_array = board_array.dup
+    temp_board_array = board_array.clone
     temp_board_array[0].unshift('-', '-', '-', '-', '-')
-    temp_board_array[1].unshift('-', '-', '-', '-')
-    temp_board_array[2].unshift('-', '-', '-')
-    temp_board_array[3].unshift('-', '-')
-    temp_board_array[4].unshift('-')
+    temp_board_array[1].unshift('-', '-', '-', '-').push('-')
+    temp_board_array[2].unshift('-', '-', '-').push('-', '-')
+    temp_board_array[3].unshift('-', '-').push('-', '-', '-')
+    temp_board_array[4].unshift('-').push('-', '-', '-', '-')
+    temp_board_array[5].push('-', '-', '-', '-', '-')
+    (6..11).each do |empty_row|
+      temp_board_array[empty_row] = Array.new (12) { '-' }
+    end
     return true if vertical_win?(temp_board_array)
 
-    temp_board_array = board_array.dup
-    temp_board_array[0].push('-', '-', '-', '-', '-')
-    temp_board_array[1].push('-', '-', '-', '-')
-    temp_board_array[2].push('-', '-', '-')
-    temp_board_array[3].push('-', '-')
-    temp_board_array[4].push('-')
-    return true if vertical_win?(temp_board_array)
+    temp_board_array2 = board_array.clone   ## dup --  even diff name messes this up ?
+    binding.pry
+    temp_board_array2[0].push('-', '-', '-', '-', '-')
+    temp_board_array2[1].push('-', '-', '-', '-').unshift('-')
+    temp_board_array2[2].push('-', '-', '-').unshift('-', '-')
+    temp_board_array2[3].push('-', '-').unshift('-', '-', '-')
+    temp_board_array2[4].push('-').unshift('-', '-', '-', '-')
+    temp_board_array2[5].unshift('-', '-', '-', '-', '-')
+    (6..11).each do |empty_row|
+      temp_board_array2[empty_row] = Array.new (12) { '-' }
+    end
+    # binding.pry
+    return true if vertical_win?(temp_board_array2)
 
     false
   end

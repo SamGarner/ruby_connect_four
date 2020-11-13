@@ -69,7 +69,7 @@ class GameBoard
   end
 
   def diagonal_win?
-    temp_board_array = board_array.clone
+    temp_board_array = board_array.dup
     temp_board_array[0].unshift('-', '-', '-', '-', '-')
     temp_board_array[1].unshift('-', '-', '-', '-').push('-')
     temp_board_array[2].unshift('-', '-', '-').push('-', '-')
@@ -81,7 +81,7 @@ class GameBoard
     end
     return true if vertical_win?(temp_board_array)
 
-    temp_board_array2 = board_array.clone   ## dup --  even diff name messes this up ?
+    temp_board_array2 = board_array.dup   ## dup --  even diff name messes this up ?
     binding.pry
     temp_board_array2[0].push('-', '-', '-', '-', '-')
     temp_board_array2[1].push('-', '-', '-', '-').unshift('-')

@@ -96,7 +96,7 @@ describe GameBoard do
       board.add_piece(1, 3)
       board.add_piece(1, 3)
 
-      expect { board.add_piece(1, 3) }.to output("That column is already full - choose another column to place your piece.\n").to_stdout#_from_any_process
+      expect { board.add_piece(1, 3) }.to output("There is no empty space there - choose another column to place your piece.\n").to_stdout#_from_any_process
     end
   end
 

@@ -65,7 +65,7 @@ class GameBoard
     elsif board_array[0][column] == '-'
       board_array[0][column] = player
     else 
-      puts 'That column is already full - choose another column to place your piece.'
+      puts 'There is no empty space there - choose another column to place your piece.'
       false
     end
   end

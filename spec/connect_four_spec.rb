@@ -120,6 +120,22 @@ describe GameBoard do
 
       expect(board.check_for_win).to be_truthy
     end
+
+    it 'player wins when has four consecutive diagonal places' do
+      board = GameBoard.new
+      board.add_piece(1, 3)
+      board.add_piece(1, 4)
+      board.add_piece(1, 4)
+      board.add_piece(1, 5)
+      board.add_piece(1, 5)
+      board.add_piece(1, 5)
+      board.add_piece(2, 2)
+      board.add_piece(2, 3)
+      board.add_piece(2, 4)
+      board.add_piece(2, 5)
+
+      expect(board.check_for_win).to be_truthy
+    end
   end 
 
   describe '#check_for_draw' do #update to be based on flag or something that's not puts?

@@ -46,7 +46,7 @@ class GameBoard
   end
 
   def check_for_win
-    return true if horizontal_win? || vertical_win?
+    true if horizontal_win? || vertical_win?
   end
 
   def horizontal_win?

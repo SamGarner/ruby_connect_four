@@ -10,6 +10,10 @@ class Game
     @next_move = [1, 2].sample
     @game_board = GameBoard.new
   end
+
+  def update_which_player_has_next_move(next_play = next_move)
+    next_play == 1 ? self.next_move = 2 : self.next_move = 1
+  end
 end
 
 class GameBoard
@@ -19,7 +23,7 @@ class GameBoard
     @board_array = Array.new (6) { Array.new (7) }
   end
 
-  def add_piece(player = 1, column)
+  def add_piece(player, column)
     if board_array[5][column].nil?
       board_array[5][column] = player
     elsif board_array[4][column].nil?
@@ -35,5 +39,9 @@ class GameBoard
     else 
       puts 'That column is already full - choose another column to place your piece.'
     end
+  end
+
+  def check_for_draw
+    board_array.all? { |n| n.compact.length == 7 }
   end
 end

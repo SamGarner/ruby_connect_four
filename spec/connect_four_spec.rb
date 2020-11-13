@@ -38,6 +38,22 @@ describe Game do
       expect(game.game_board).to be_truthy
     end
   end
+
+  describe '#update_which_player_has_next_move' do
+    it 'a player does not have next turn if that player just went' do
+      game = Game.new
+      current = game.next_move
+
+      expect(game.update_which_player_has_next_move).not_to eq(current)
+    end
+
+    it 'player 1 has next turn if player 2 just went' do
+      game = Game.new
+      game.next_move = 2
+
+      expect(game.update_which_player_has_next_move).to eq(1)
+    end
+  end
 end
 
 describe GameBoard do
@@ -61,6 +77,38 @@ describe GameBoard do
       board.add_piece(1, 3)
 
       expect(board.board_array[5][3]).to eq(1)
+    end
+
+    it 'adds piece to second row if first already taken' do
+      board = GameBoard.new
+      board.add_piece(1,3)
+      board.add_piece(1,3)
+
+      expect(board.board_array[4][3]).to eq(1)
+    end
+
+    it "returns column full 'error' if player tries to play a column with no spaces left" do
+      board = GameBoard.new
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+
+      expect { board.add_piece(1, 3) }.to output("That column is already full - choose another column to place your piece.\n").to_stdout#_from_any_process
+    end
+  end
+
+  describe '#check_for_win' do
+  end 
+
+  describe '#check_for_draw' do #update to be based on flag or something that's not puts?
+    it 'is a draw is all spaces have been filled' do
+      board = GameBoard.new
+      board.board_array = Array.new (6) { Array.new(7) { 1 } }
+
+      expect(board.check_for_draw).to be_truthy
     end
   end
 end

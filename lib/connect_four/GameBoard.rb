@@ -24,14 +24,13 @@ class GameBoard
     false
   end
 
-  def display_board   # sidenote: puts board array separates values
+  def display_board
     (0..5).each { |row| print "#{board_array[row]} \n" }
     # print column labels:
     print "  0    1    2    3    4    5    6 \n"
   end
 
   def check_for_draw
-    # board_array.all? { |n| n.compact.length == 7 }
     !board_array[0].include?('-')
   end
 
@@ -89,7 +88,7 @@ class GameBoard
   # shift gameboard so upward diagonals can be checked with vertical_win?
   def upward_diagonal_win?
     temp_board_array = []
-    (0..5).each { |row| temp_board_array[row] = board_array[row].dup }  ## dup -- the arrays in the array are not being dup'd
+    (0..5).each { |row| temp_board_array[row] = board_array[row].dup }
     shift_gameboard_for_upward_diagonal_check(temp_board_array)
     make_transposable_by_padding_board_with_empty_rows(temp_board_array)
     return true if vertical_win?(temp_board_array)

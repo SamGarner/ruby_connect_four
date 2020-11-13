@@ -3,10 +3,6 @@
 require 'require_all'
 require_all 'lib/connect_four/'
 
-# test that an empty game board is created
-# test that piece falls to lowest unfilled point in the column
-# test same but next turn is other players' piece
-
 describe Game do
   describe '#initialize' do
     it 'player 1 initialized' do
@@ -67,7 +63,7 @@ describe GameBoard do
     it 'each of the 6 elements will be an array of 7' do
       board = GameBoard.new
 
-      expect(board.board_array).to all(eq(['-', '-', '-', '-', '-', '-', '-']))  #########
+      expect(board.board_array).to all(eq(['-', '-', '-', '-', '-', '-', '-']))
     end
   end
 

@@ -46,7 +46,7 @@ class GameBoard
   end
 
   def check_for_win
-    true if horizontal_win? || vertical_win?
+    true if horizontal_win? || vertical_win? || diagonal_win?
   end
 
   def horizontal_win?
@@ -57,11 +57,31 @@ class GameBoard
     false
   end
 
-  def vertical_win?
-    transposed = board_array.transpose
+  def vertical_win?(array = board_array)
+    transposed = array.transpose
     transposed.each do |row|
       return true if row.join.match(/1{4}/) || row.join.match(/2{4}/)
     end
+
+    false
+  end
+
+  def diagonal_win?
+    temp_board_array = board_array.dup
+    temp_board_array[0].unshift('-', '-', '-', '-', '-')
+    temp_board_array[1].unshift('-', '-', '-', '-')
+    temp_board_array[2].unshift('-', '-', '-')
+    temp_board_array[3].unshift('-', '-')
+    temp_board_array[4].unshift('-')
+    return true if vertical_win?(temp_board_array)
+
+    temp_board_array = board_array.dup
+    temp_board_array[0].push('-', '-', '-', '-', '-')
+    temp_board_array[1].push('-', '-', '-', '-')
+    temp_board_array[2].push('-', '-', '-')
+    temp_board_array[3].push('-', '-')
+    temp_board_array[4].push('-')
+    return true if vertical_win?(temp_board_array)
 
     false
   end

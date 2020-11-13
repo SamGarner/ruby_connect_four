@@ -5,7 +5,7 @@ class Game
   attr_accessor :game_board, :next_move, :game_over, :play_column
 
   def initialize
-    @player1 = 'ß' #update check for win
+    @player1 = 'ß'
     @player2 = '₴'
     @next_move = [1, 2].sample
     @game_board = GameBoard.new
@@ -26,19 +26,30 @@ class Game
   end
 
   def play
-    puts "Welcome to connect four! #{player1}'s' go first." if next_move == 1
-    puts "Welcome to connect four! #{player2}'s' go first." if next_move == 2
+    game_start_message
     game_loop
+    game_over_message
+  end
+
+  def game_start_message
+    puts "Welcome to connect four! #{player1}'s go first." if next_move == 1
+    puts "Welcome to connect four! #{player2}'s go first." if next_move == 2
+  end
+
+  def game_over_message
     puts "#{player1}'s win!" if game_over == 1 && next_move == 1
     puts "#{player2}'s win!" if game_over == 1 && next_move == 2
     puts "It's a draw!" if game_over == 2
-    # exit
+  end
+
+  def which_players_turn_message
+    puts "\n#{player1}'s turn." if next_move == 1
+    puts "\n#{player2}'s turn." if next_move == 2
   end
 
   def game_loop
     while game_over.zero?
-      puts "\n#{player1}'s turn." if next_move == 1
-      puts "\n#{player2}'s turn." if next_move == 2
+      which_players_turn_message
       get_user_next_play
       next if game_board.add_piece(get_player_piece, play_column) == false
 

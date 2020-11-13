@@ -68,7 +68,6 @@ class GameBoard
     downward_diagonal_win? || upward_diagonal_win?
   end
 
-  # shift gameboard so downward diagonals can be checked with vertical_win?
   def downward_diagonal_win?
     temp_board_array = []
     (0..5).each { |row| temp_board_array[row] = board_array[row].dup }
@@ -79,6 +78,7 @@ class GameBoard
     false
   end
 
+  # shift gameboard so downward diagonals can be checked with vertical_win?
   def shift_gameboard_for_downward_diagonal_check(array)
     array[0].unshift('-', '-', '-', '-', '-')
     array[1].unshift('-', '-', '-', '-').push('-')
@@ -105,6 +105,7 @@ class GameBoard
     false
   end
 
+  # shift gameboard so upward diagonals can be checked with vertical_win?
   def shift_gameboard_for_upward_diagonal_check(array)
     array[0].push('-', '-', '-', '-', '-')
     array[1].push('-', '-', '-', '-').unshift('-')

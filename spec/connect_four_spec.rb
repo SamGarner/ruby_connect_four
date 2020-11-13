@@ -67,7 +67,7 @@ describe GameBoard do
     it 'each of the 6 elements will be an array of 7' do
       board = GameBoard.new
 
-      expect(board.board_array).to all(eq([nil, nil, nil, nil, nil, nil, nil]))  #########
+      expect(board.board_array).to all(eq(['-', '-', '-', '-', '-', '-', '-']))  #########
     end
   end
 
@@ -101,6 +101,25 @@ describe GameBoard do
   end
 
   describe '#check_for_win' do
+    it 'player wins when has four consecutive horizontal places' do
+      board = GameBoard.new
+      board.add_piece(1, 1)
+      board.add_piece(1, 2)
+      board.add_piece(1, 3)
+      board.add_piece(1, 4)
+
+      expect(board.check_for_win).to be_truthy
+    end
+
+    it 'player wins when has four consecutive vertical places' do
+      board = GameBoard.new
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+      board.add_piece(1, 3)
+
+      expect(board.check_for_win).to be_truthy
+    end
   end 
 
   describe '#check_for_draw' do #update to be based on flag or something that's not puts?

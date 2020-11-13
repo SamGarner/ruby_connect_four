@@ -20,21 +20,21 @@ class GameBoard
   attr_accessor :board_array
 
   def initialize
-    @board_array = Array.new (6) { Array.new (7) }
+    @board_array = Array.new (6) { Array.new (7) { '-' } }
   end
 
   def add_piece(player, column)
-    if board_array[5][column].nil?
+    if board_array[5][column] == '-'
       board_array[5][column] = player
-    elsif board_array[4][column].nil?
+    elsif board_array[4][column] == '-'
       board_array[4][column] = player
-    elsif board_array[3][column].nil?
+    elsif board_array[3][column] == '-'
       board_array[3][column] = player
-    elsif board_array[2][column].nil?
+    elsif board_array[2][column] == '-'
       board_array[2][column] = player
-    elsif board_array[1][column].nil?
+    elsif board_array[1][column] == '-'
       board_array[1][column] = player
-    elsif board_array[1][column].nil?
+    elsif board_array[1][column] == '-'
       board_array[1][column] = player
     else 
       puts 'That column is already full - choose another column to place your piece.'
@@ -43,5 +43,26 @@ class GameBoard
 
   def check_for_draw
     board_array.all? { |n| n.compact.length == 7 }
+  end
+
+  def check_for_win
+    return true if horizontal_win? || vertical_win?
+  end
+
+  def horizontal_win?
+    board_array.each do |row|
+      return true if row.join.match(/1{4}/) || row.join.match(/2{4}/)
+    end
+
+    false
+  end
+
+  def vertical_win?
+    transposed = board_array.transpose
+    transposed.each do |row|
+      return true if row.join.match(/1{4}/) || row.join.match(/2{4}/)
+    end
+
+    false
   end
 end

@@ -69,7 +69,8 @@ class GameBoard
   end
 
   def diagonal_win?
-    temp_board_array = board_array.dup
+    temp_board_array = []
+    (0..5).each { |row| temp_board_array[row] = board_array[row].dup }
     temp_board_array[0].unshift('-', '-', '-', '-', '-')
     temp_board_array[1].unshift('-', '-', '-', '-').push('-')
     temp_board_array[2].unshift('-', '-', '-').push('-', '-')
@@ -81,19 +82,18 @@ class GameBoard
     end
     return true if vertical_win?(temp_board_array)
 
-    temp_board_array2 = board_array.dup   ## dup --  even diff name messes this up ?
-    binding.pry
-    temp_board_array2[0].push('-', '-', '-', '-', '-')
-    temp_board_array2[1].push('-', '-', '-', '-').unshift('-')
-    temp_board_array2[2].push('-', '-', '-').unshift('-', '-')
-    temp_board_array2[3].push('-', '-').unshift('-', '-', '-')
-    temp_board_array2[4].push('-').unshift('-', '-', '-', '-')
-    temp_board_array2[5].unshift('-', '-', '-', '-', '-')
+    temp_board_array = []
+    (0..5).each { |row| temp_board_array[row] = board_array[row].dup }  ## dup -- the arrays in the array are not being dup'd
+    temp_board_array[0].push('-', '-', '-', '-', '-')
+    temp_board_array[1].push('-', '-', '-', '-').unshift('-')
+    temp_board_array[2].push('-', '-', '-').unshift('-', '-')
+    temp_board_array[3].push('-', '-').unshift('-', '-', '-')
+    temp_board_array[4].push('-').unshift('-', '-', '-', '-')
+    temp_board_array[5].unshift('-', '-', '-', '-', '-')
     (6..11).each do |empty_row|
-      temp_board_array2[empty_row] = Array.new (12) { '-' }
+      temp_board_array[empty_row] = Array.new (12) { '-' }
     end
-    # binding.pry
-    return true if vertical_win?(temp_board_array2)
+    return true if vertical_win?(temp_board_array)
 
     false
   end

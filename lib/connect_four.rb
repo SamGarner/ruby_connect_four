@@ -69,6 +69,11 @@ class GameBoard
   end
 
   def diagonal_win?
+    downward_diagonal_win? || upward_diagonal_win?
+  end
+
+  # shift gameboard so downward diagonals can be checked with vertical_win?
+  def downward_diagonal_win?
     temp_board_array = []
     (0..5).each { |row| temp_board_array[row] = board_array[row].dup }
     temp_board_array[0].unshift('-', '-', '-', '-', '-')
@@ -77,11 +82,18 @@ class GameBoard
     temp_board_array[3].unshift('-', '-').push('-', '-', '-')
     temp_board_array[4].unshift('-').push('-', '-', '-', '-')
     temp_board_array[5].push('-', '-', '-', '-', '-')
+
     (6..11).each do |empty_row|
       temp_board_array[empty_row] = Array.new (12) { '-' }
     end
+    # 5.times { temp_board_array.push(['-', '-', '-', '-', '-' , '-', '-', '-', '-', '-', '-', '-']) }
     return true if vertical_win?(temp_board_array)
 
+    false
+  end
+
+  # shift gameboard so upward diagonals can be checked with vertical_win?
+  def upward_diagonal_win?
     temp_board_array = []
     (0..5).each { |row| temp_board_array[row] = board_array[row].dup }  ## dup -- the arrays in the array are not being dup'd
     temp_board_array[0].push('-', '-', '-', '-', '-')
@@ -90,6 +102,7 @@ class GameBoard
     temp_board_array[3].push('-', '-').unshift('-', '-', '-')
     temp_board_array[4].push('-').unshift('-', '-', '-', '-')
     temp_board_array[5].unshift('-', '-', '-', '-', '-')
+
     (6..11).each do |empty_row|
       temp_board_array[empty_row] = Array.new (12) { '-' }
     end

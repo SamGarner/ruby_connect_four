@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
 require 'require_all'
-require_all 'lib/'
+require_all 'lib/connect_four/'
 
 # test that an empty game board is created
 # test that piece falls to lowest unfilled point in the column
@@ -103,52 +103,52 @@ describe GameBoard do
   describe '#check_for_win' do
     it 'player wins when has four consecutive horizontal places' do
       board = GameBoard.new
-      board.add_piece(1, 1)
-      board.add_piece(1, 2)
-      board.add_piece(1, 3)
-      board.add_piece(1, 4)
+      board.add_piece('ß', 1)
+      board.add_piece('ß', 2)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 4)
 
       expect(board.check_for_win).to be_truthy
     end
 
     it 'player wins when has four consecutive vertical places' do
       board = GameBoard.new
-      board.add_piece(1, 3)
-      board.add_piece(1, 3)
-      board.add_piece(1, 3)
-      board.add_piece(1, 3)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 3)
 
       expect(board.check_for_win).to be_truthy
     end
 
     it 'player wins when has four consecutive upward diagonal places' do
       board = GameBoard.new
-      board.add_piece(1, 3)
-      board.add_piece(1, 4)
-      board.add_piece(1, 4)
-      board.add_piece(1, 5)
-      board.add_piece(1, 5)
-      board.add_piece(1, 5)
-      board.add_piece(2, 2)
-      board.add_piece(2, 3)
-      board.add_piece(2, 4)
-      board.add_piece(2, 5)
+      board.add_piece('₴', 3)
+      board.add_piece('₴', 4)
+      board.add_piece('₴', 4)
+      board.add_piece('₴', 5)
+      board.add_piece('₴', 5)
+      board.add_piece('₴', 5)
+      board.add_piece('ß', 2)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 4)
+      board.add_piece('ß', 5)
 
       expect(board.check_for_win).to be_truthy
     end
 
     it 'player wins when has four consecutive downward diagonal places' do
       board = GameBoard.new
-      board.add_piece(1, 2)
-      board.add_piece(1, 2)
-      board.add_piece(1, 2)
-      board.add_piece(1, 3)
-      board.add_piece(1, 3)
-      board.add_piece(1, 4)
-      board.add_piece(2, 2)
-      board.add_piece(2, 3)
-      board.add_piece(2, 4)
-      board.add_piece(2, 5)
+      board.add_piece('₴', 2)
+      board.add_piece('₴', 2)
+      board.add_piece('₴', 2)
+      board.add_piece('₴', 3)
+      board.add_piece('₴', 3)
+      board.add_piece('₴', 4)
+      board.add_piece('ß', 2)
+      board.add_piece('ß', 3)
+      board.add_piece('ß', 4)
+      board.add_piece('ß', 5)
 
       expect(board.check_for_win).to be_truthy
     end

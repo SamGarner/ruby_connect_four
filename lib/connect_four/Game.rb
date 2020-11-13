@@ -1,8 +1,8 @@
 # frozen_string_literal: false
 
 class Game
-  attr_reader :player1, :player2
-  attr_accessor :game_board, :next_move, :game_over, :play_column
+  attr_reader :player1, :player2, :play_column
+  attr_accessor :game_board, :next_move, :game_over
 
   def initialize
     @player1 = 'ß'

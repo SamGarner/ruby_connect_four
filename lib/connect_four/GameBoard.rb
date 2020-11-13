@@ -8,33 +8,25 @@ class GameBoard
   end
 
   def add_piece(player, column)
-    if board_array[5][column] == '-'
-      board_array[5][column] = player
-    elsif board_array[4][column] == '-'
-      board_array[4][column] = player
-    elsif board_array[3][column] == '-'
-      board_array[3][column] = player
-    elsif board_array[2][column] == '-'
-      board_array[2][column] = player
-    elsif board_array[1][column] == '-'
-      board_array[1][column] = player
-    elsif board_array[1][column] == '-'
-      board_array[1][column] = player
-    elsif board_array[0][column] == '-'
-      board_array[0][column] = player
-    else 
-      puts 'There is no empty space there - choose another column to place your piece.'
-      false
+    count = 0
+    5.downto(0) do |row|
+      if board_array[row][column] == '-'
+        board_array[row][column] = player
+        break
+      else
+        count += 1
+      end
     end
+
+    return true if count < 6
+   
+    puts 'There is no empty space there - choose another column to place your piece.'
+    false
   end
 
-  def display_board # wait on final piece display to format/even out, # puts board array separates values
-    print "#{board_array[0]} \n"
-    print "#{board_array[1]} \n"
-    print "#{board_array[2]} \n"
-    print "#{board_array[3]} \n"
-    print "#{board_array[4]} \n"
-    print "#{board_array[5]} \n"
+  def display_board   # sidenote: puts board array separates values
+    (0..5).each { |row| print "#{board_array[row]} \n" }
+    # print column labels:
     print "  0    1    2    3    4    5    6 \n"
   end
 
